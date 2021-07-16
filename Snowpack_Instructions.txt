@@ -54,7 +54,12 @@ helloWorld();
     <h1>Welcome to Snowpack!</h1>
 +   <script type="module" src="/index.js"></script>
   </body>
-// Check your console on your Snowpack site. You should see "Hello World!" Try making a change to the module. Snowpack rebuilds that module without rebuilding the rest of your code. Snowpack builds every file individually and caches it indefinitely. Your development environment never builds a file more than once and your browser never downloads a file twice (until it changes). This is the real power of unbundled development, and the secret behind what makes Snowpack so fast.
+// Check your console on your Snowpack site. You should see "Hello World!" Try making a change 
+// to the module. Snowpack rebuilds that module without rebuilding the rest of your code. 
+// Snowpack builds every file individually and caches it indefinitely. Your development 
+// environment never builds a file more than once and your browser never downloads a file 
+// twice (until it changes). This is the real power of unbundled development, and the secret 
+// behind what makes Snowpack so fast.
 
 // Using npm Packages
 // Install the canvas-confetti package from npm 
@@ -75,7 +80,7 @@ body {
   font-family: sans-serif;
 }
 
-// Include it in your project by adding it to index.html in the <head>
+// Include the css file in your project by adding it to index.html in the <head>
     <meta name="description" content="Starter Snowpack App" />
 +   <link rel="stylesheet" type="text/css" href="/index.css" />
     <title>Starter Snowpack App</title>
@@ -98,7 +103,7 @@ export default {
     [
       '@snowpack/plugin-webpack',
       {
-        /* see "Plugin Options" below */
+        /* see "Plugin Options" online */
       },
     ],
   ],
@@ -108,7 +113,8 @@ export default {
 // Now you can run this in your terminal:
 npm run build
 
-// The resulting index.html file may not run because there is a path error in 2 script load commands at the end of the <body>.
+// The resulting index.html file may not run because there is a path error in 2 script load 
+// commands at the end of the <body>.
 // <script src="./js/webpack-runtime.aed196d9f42cdc4a768d.js"></script>
 // <script src="./js/index.8dba06e41f3d56854a24.js"></script></body>
 // The period (.) is missing from the src = "/js-----
