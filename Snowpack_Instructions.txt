@@ -1,7 +1,7 @@
 // https://www.snowpack.dev/
 
-// Create the new directory and change to the new dirrectory
-cd my-first-snowpack
+// Create the new directory and change to the new directory
+cd snowpack1
 
 // Create a package.json file in your project directory 
 npm init --yes
@@ -9,7 +9,7 @@ npm init --yes
 // Install Snowpack to your dev dependencies
 npm install --save-dev snowpack
 
-// Adding a basic HTML file allows us to run Snowpack's development server. Create an index.html in your project with the following contents:
+// Adding a basic HTML file allows us to run Snowpack's development server. Create a file index.html in your project with the following contents:
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -23,7 +23,7 @@ npm install --save-dev snowpack
   </body>
 </html>
 
-// Add the Snowpack development server to package.json under as the start script:
+// Add the Snowpack development server to package.json under in the script section:
   "scripts": {
 +   "start": "snowpack dev",
     "test": "echo "Error: no test specified" && exit 1"
@@ -37,7 +37,7 @@ npm run start
 
 // Using JavaScript
 // Create a new JavaScript file called hello-world.js that exports a single helloWorld function:
-// my-first-snowpack/hello-world.js
+// snowpack1/hello-world.js
 export function helloWorld() {
   console.log('Hello World!');
 }
