@@ -1,0 +1,115 @@
+// https://www.snowpack.dev/
+
+// Create the new directory and change to the new dirrectory
+cd my-first-snowpack
+
+// Create a package.json file in your project directory 
+npm init --yes
+
+// Install Snowpack to your dev dependencies
+npm install --save-dev snowpack
+
+// Adding a basic HTML file allows us to run Snowpack's development server. Create an index.html in your project with the following contents:
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Starter Snowpack App" />
+    <title>Starter Snowpack App</title>
+  </head>
+  <body>
+    <h1>Welcome to Snowpack!</h1>
+  </body>
+</html>
+
+// Add the Snowpack development server to package.json under as the start script:
+  "scripts": {
++   "start": "snowpack dev",
+    "test": "echo "Error: no test specified" && exit 1"
+  },
+
+// Start the Snowpack development server
+npm run start
+
+// If all went well, Snowpack automatically opens your site in a new browser!
+// Try changing the index.html and saving while the server is running, the site should refresh and show changes automatically.
+
+// Using JavaScript
+// Create a new JavaScript file called hello-world.js that exports a single helloWorld function:
+// my-first-snowpack/hello-world.js
+export function helloWorld() {
+  console.log('Hello World!');
+}
+
+// Then create an index.js that imports your new module using ESM syntax:
+// my-first-snowpack/index.js
+import {helloWorld} from './hello-world.js';
+
+helloWorld();
+
+// Snowpack scans for files referenced in index.html.
+// Add your index.js to index.html at the bottom of the <body> tag:
+  <body>
+    <h1>Welcome to Snowpack!</h1>
++   <script type="module" src="/index.js"></script>
+  </body>
+// Check your console on your Snowpack site. You should see "Hello World!" Try making a change to the module. Snowpack rebuilds that module without rebuilding the rest of your code. Snowpack builds every file individually and caches it indefinitely. Your development environment never builds a file more than once and your browser never downloads a file twice (until it changes). This is the real power of unbundled development, and the secret behind what makes Snowpack so fast.
+
+// Using npm Packages
+// Install the canvas-confetti package from npm 
+npm install --save canvas-confetti
+
+// Edit index.js and add this code:
+helloWorld();
+
++import confetti from 'canvas-confetti';
++confetti.create(document.getElementById('canvas'), {
++  resize: true,
++  useWorker: true,
++ })({ particleCount: 200, spread: 200 });
+
+// Adding CSS
+// Add the following css as a new index.css file:
+body {
+  font-family: sans-serif;
+}
+
+// Include it in your project by adding it to index.html in the <head>
+    <meta name="description" content="Starter Snowpack App" />
++   <link rel="stylesheet" type="text/css" href="/index.css" />
+    <title>Starter Snowpack App</title>
+
+// Build for production/deployment
+// Add the snowpack build command to package.json so it's easier to run on the command line:
+  "scripts": {
+    "start": "snowpack dev",
++   "build": "snowpack build",
+    "test": "echo "Error: no test specified" && exit 1"
+
+  },
+
+// Install @snowpack/plugin-webpack (https://www.npmjs.com/package/@snowpack/plugin-webpack)
+npm install --save-dev @snowpack/plugin-webpack
+
+// Add @snowpack/plugin-webpack to snowpack.config.js:
+export default {
+  plugins: [
+    [
+      '@snowpack/plugin-webpack',
+      {
+        /* see "Plugin Options" below */
+      },
+    ],
+  ],
+};
+
+// Once added to the configuration, @snowpack/plugin-webpack will run automatically on snowpack build.
+// Now you can run this in your terminal:
+npm run build
+
+// The resulting index.html file may not run because there is a path error in 2 script load commands at the end of the <body>.
+// <script src="./js/webpack-runtime.aed196d9f42cdc4a768d.js"></script>
+// <script src="./js/index.8dba06e41f3d56854a24.js"></script></body>
+// The period (.) is missing from the src = "/js-----
+// The above 2 lines have have the error fixed.
